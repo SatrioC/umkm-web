@@ -1,0 +1,355 @@
+/* LOGIN PORTAL MITRA UMKM */
+.login-page-wrapper {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.login-split-container {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  max-width: 980px;
+  width: 100%;
+  background: var(--sf);
+  border: 1px solid var(--br);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(11, 99, 216, 0.08);
+}
+
+.login-benefit-panel {
+  background: var(--ps);
+  border-right: 1px solid var(--ps-br);
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-benefit-badge {
+  display: inline-block;
+  background: rgba(11, 99, 216, 0.12);
+  color: var(--pri);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  width: max-content;
+}
+
+:root[data-theme="dark"] .login-benefit-badge {
+  background: rgba(59, 142, 245, 0.2);
+  color: var(--pri);
+}
+
+.login-benefit-panel h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--tx);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.login-benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-benefit-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.login-benefit-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--sf);
+  border: 1px solid var(--br);
+  color: var(--pri);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.login-benefit-text b {
+  display: block;
+  font-size: 14px;
+  color: var(--tx);
+  margin-bottom: 2px;
+}
+
+.login-benefit-text p {
+  font-size: 12.5px;
+  color: var(--mut);
+  line-height: 1.45;
+}
+
+.login-benefit-footer {
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ps-br);
+  font-size: 12px;
+  color: var(--mut);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-form-panel {
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--tx);
+  letter-spacing: -0.02em;
+}
+
+.login-form-header p {
+  font-size: 13.5px;
+  color: var(--mut);
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+.password-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrap input {
+  padding-right: 40px;
+}
+
+.btn-toggle-pass {
+  position: absolute;
+  right: 10px;
+  color: var(--mut);
+  padding: 4px;
+}
+
+.btn-toggle-pass:hover {
+  color: var(--tx);
+}
+
+.login-options-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--mut);
+  margin: 14px 0 20px;
+}
+
+.login-options-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.login-bottom-hint {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--mut);
+}
+
+.login-bottom-hint a {
+  color: var(--pri);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.login-bottom-hint a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 860px) {
+  .login-split-container {
+    grid-template-columns: 1fr;
+  }
+  .login-benefit-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--br);
+    padding: 30px 24px;
+  }
+  .login-form-panel {
+    padding: 30px 24px;
+  }
+}
+
+/* AUTH CARD (REF: CLEAN MODAL & PAGE AUTH) */
+.modal-dialog.auth-modal-dialog {
+  max-width: 440px;
+  padding: 32px 28px;
+  border-radius: 16px;
+  border: 1px solid var(--br);
+}
+
+.auth-card-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.auth-card-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pri);
+  letter-spacing: -0.025em;
+  margin: 0 0 6px 0;
+}
+
+.auth-card-subtitle {
+  font-size: 13.5px;
+  color: var(--mut);
+  margin: 0;
+}
+
+.auth-input-group {
+  position: relative;
+  margin-bottom: 13px;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mut);
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.auth-field {
+  width: 100%;
+  background: var(--subtle);
+  border: 1px solid var(--br);
+  border-radius: 8px;
+  padding: 12px 14px 12px 42px;
+  font-size: 14px;
+  color: var(--tx);
+  font-family: inherit;
+  transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+.auth-field:focus {
+  outline: none;
+  border-color: var(--pri);
+  background: var(--sf);
+  box-shadow: 0 0 0 3px rgba(11, 99, 216, 0.12);
+}
+
+.auth-field.has-toggle {
+  padding-right: 42px;
+}
+
+.auth-toggle-pass-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--mut);
+  cursor: pointer;
+  padding: 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+
+.auth-toggle-pass-btn:hover {
+  color: var(--tx);
+}
+
+.auth-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 18px;
+  font-size: 12.5px;
+  color: var(--mut);
+}
+
+.auth-actions-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.auth-link {
+  color: var(--pri);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-btn-primary {
+  width: 100%;
+  background: var(--pri);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s, transform 0.05s;
+}
+
+.auth-btn-primary:hover {
+  background: var(--pri-hover);
+}
+
+.auth-btn-primary:active {
+  transform: scale(0.99);
+}
+
+.auth-btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--mut);
+}
+
+.auth-footer a {
+  color: var(--pri);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+

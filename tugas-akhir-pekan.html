@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tugas Akhir Pekan – Sambilan Mahasiswa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="weekend">
+  <header class="navbar">
+    <div class="container-wrapper">
+      <a class="brand-logo" href="index.html">
+        <span class="brand-logo-star">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </span>
+        Sambilan
+      </a>
+      <nav class="nav-links-menu" aria-label="Navigasi Utama">
+        <a class="nav-link" href="index.html">Lowongan Kerja</a>
+        <a class="nav-link" href="index.html#umkm">Mitra UMKM</a>
+        <a class="nav-link" href="index.html#cara">Alur Kerja</a>
+      </nav>
+      <span class="spacer"></span>
+      <div class="nav-actions">
+        <button type="button" class="btn-icon-theme" data-toggle-theme aria-label="Ganti mode gelap/terang">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <div id="nav-auth-slot" style="display:inline-flex;align-items:center;gap:8px">
+          <button type="button" class="btn btn-outline" style="padding:7px 12px;font-size:13px" data-open-login>
+            Masuk Mitra
+          </button>
+        </div>
+        <button type="button" class="btn btn-outline hide" data-open-drawer>
+          Kelola Pelamar
+        </button>
+        <button type="button" class="btn btn-primary" data-open-post-job>
+          + Pasang Lowongan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-wrapper" style="margin-top:24px">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Beranda</a>
+      <span>/</span>
+      <span style="color:var(--tx);font-weight:600">Tugas Akhir Pekan</span>
+    </nav>
+
+    <div class="explore-page-header">
+      <h1>Lowongan & Tugas Akhir Pekan</h1>
+      <p>Pilihan pekerjaan paruh waktu Sabtu & Minggu di mitra UMKM terverifikasi tanpa bentrok jadwal kuliah.</p>
+    </div>
+
+    <div class="explore-layout">
+      <aside class="surface-box explore-sidebar">
+        <div class="explore-sidebar-title">
+          <span>Filter Lowongan</span>
+          <button type="button" class="filter-reset-link" data-action="reset-filters">Reset</button>
+        </div>
+
+        <div class="filter-group-block">
+          <div class="filter-group-title">Urutkan Berdasarkan</div>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_sort" value="latest" checked>
+            <span>Paling Relevan / Baru</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_sort" value="stipend">
+            <span>Honorarium Tertinggi</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_sort" value="distance">
+            <span>Jarak Terdekat</span>
+          </label>
+        </div>
+
+        <div class="filter-group-block">
+          <div class="filter-group-title">Kategori Tugas</div>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="" checked>
+            <span>Semua Kategori</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="booth">
+            <span>Jaga Booth & Event</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="sosmed">
+            <span>Admin Media Sosial</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="desain">
+            <span>Desain Kreatif</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="foto">
+            <span>Foto & Video Produk</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_category" value="data">
+            <span>Input Data & Stok</span>
+          </label>
+        </div>
+
+        <div class="filter-group-block">
+          <div class="filter-group-title">Radius dari Kampus</div>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_distance" value="10" checked>
+            <span>Semua Jarak</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_distance" value="1.5">
+            <span>&le; 1.5 km (Sangat Dekat)</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_distance" value="3.0">
+            <span>&le; 3.0 km (Sekitar Kampus)</span>
+          </label>
+        </div>
+
+        <div class="filter-group-block">
+          <div class="filter-group-title">Honorarium Minimal</div>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_stipend" value="0" checked>
+            <span>Semua Besaran</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_stipend" value="100000">
+            <span>&ge; Rp 100.000</span>
+          </label>
+          <label class="filter-option-item">
+            <input type="radio" name="filter_stipend" value="150000">
+            <span>&ge; Rp 150.000</span>
+          </label>
+        </div>
+      </aside>
+
+      <section class="explore-results-panel">
+        <div style="margin-bottom:16px">
+          <input
+            type="text"
+            id="explore-search-input"
+            class="form-input"
+            placeholder="Cari posisi tugas akhir pekan atau nama mitra UMKM..."
+            style="padding:12px 16px;background:var(--sf);font-size:14px"
+          >
+        </div>
+
+        <div class="explore-toolbar">
+          <span class="results-count-text" id="weekend-results-count">Memuat lowongan...</span>
+          <span style="font-size:12.5px;color:var(--mut)">Semua lowongan dapat langsung dihubungi lewat WhatsApp</span>
+        </div>
+
+        <div class="cards-grid" id="weekend-tasks-grid"></div>
+      </section>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container-wrapper">
+        <div class="footer-grid">
+          <div>
+            <a class="brand-logo" href="index.html">
+              <span class="brand-logo-star">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              Sambilan
+            </a>
+            <p class="footer-brand-desc">
+              Pilihan tugas paruh waktu akhir pekan khusus mahasiswa. Terhubung langsung dengan UMKM lokal terverifikasi.
+            </p>
+          </div>
+          <div>
+            <div class="footer-col-title">Navigasi Halaman</div>
+            <ul class="footer-links-list">
+              <li><a href="index.html">Beranda Utama</a></li>
+              <li><a href="tugas-akhir-pekan.html">Tugas Akhir Pekan</a></li>
+              <li><a href="tugas-dekat-kampus.html">Tugas Dekat Kampus</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-col-title">Untuk Mitra UMKM</div>
+            <ul class="footer-links-list">
+              <li><a href="javascript:void(0)" data-open-post-job>Pasang Lowongan Baru</a></li>
+              <li><a href="javascript:void(0)" data-open-drawer>Kelola Lamaran Masuk</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-row">
+          <span>© 2026 Sambilan Platform · Halaman Tugas Akhir Pekan</span>
+          <span>Sesuai Standar Tampilan Portal Kerja Glints</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <nav class="bottom-tabbar" aria-label="Menu navigasi ponsel">
+    <button type="button" onclick="window.location.href='index.html'">
+      <span class="bottom-tabbar-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      </span>
+      Beranda
+    </button>
+    <button type="button" class="active">
+      <span class="bottom-tabbar-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      </span>
+      Akhir Pekan
+    </button>
+    <button type="button" data-open-drawer>
+      <span class="bottom-tabbar-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+      </span>
+      Tugas Saya
+    </button>
+    <button type="button" data-open-post-job>
+      <span class="bottom-tabbar-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </span>
+      Pasang
+    </button>
+  </nav>
+
+  <div class="modal-backdrop" id="modal-overlay-backdrop">
+    <div class="modal-dialog" id="task-detail-modal" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <aside class="side-drawer" id="my-tasks-drawer" aria-label="Tugas saya"></aside>
+
+  <div class="toast-message" id="toast-feedback" role="status"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

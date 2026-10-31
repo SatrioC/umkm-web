@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Masuk Portal Mitra UMKM – Sambilan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container-wrapper">
+      <a class="brand-logo" href="index.html">
+        <span class="brand-logo-star">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </span>
+        Sambilan <span class="section-pill-tag">Portal Mitra UMKM</span>
+      </a>
+      <span class="spacer"></span>
+      <div class="nav-actions">
+        <button type="button" class="btn-icon-theme" data-toggle-theme aria-label="Ganti mode gelap/terang">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="index.html" class="btn btn-outline">
+          ← Kembali ke Beranda
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="login-page-wrapper">
+    <div class="login-split-container">
+      <div class="login-benefit-panel">
+        <div>
+          <span class="login-benefit-badge">PORTAL PEMBERI KERJA</span>
+          <h1>Pasang Lowongan &amp; Rekrut Mahasiswa Cepat</h1>
+          
+          <div class="login-benefit-list">
+            <div class="login-benefit-item">
+              <div class="login-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="login-benefit-text">
+                <b>Jangkau Mahasiswa Sekitar Kampus</b>
+                <p>Lowongan langsung tampil bagi mahasiswa dalam radius terdekat (&lt; 3 km) tanpa biaya perantara.</p>
+              </div>
+            </div>
+
+            <div class="login-benefit-item">
+              <div class="login-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <div class="login-benefit-text">
+                <b>Opsi Fee Prioritas Rp 25.000</b>
+                <p>Pilih paket prioritas agar lowongan Anda tampil permanen di Halaman Depan utama untuk respon instan.</p>
+              </div>
+            </div>
+
+            <div class="login-benefit-item">
+              <div class="login-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <div class="login-benefit-text">
+                <b>Komunikasi Langsung WhatsApp</b>
+                <p>Pelamar yang berminat menghubungi WhatsApp resmi usaha Anda dengan template data diri yang siap ditinjau.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="login-benefit-footer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Terintegrasi Database SQLite · 100% Bebas Potongan Honor
+        </div>
+      </div>
+
+      <div class="login-form-panel">
+        <div id="login-view-block">
+          <div class="auth-card-header">
+            <h2 class="auth-card-title">Login</h2>
+            <p class="auth-card-subtitle">Sign in to your account</p>
+          </div>
+
+          <form id="partner-login-form">
+            <div class="auth-input-group">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <input
+                type="text"
+                id="login-identifier"
+                class="auth-field"
+                placeholder="Username / No. WhatsApp"
+                required
+                autocomplete="username"
+              >
+            </div>
+
+            <div class="auth-input-group">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </span>
+              <input
+                type="password"
+                id="login-password"
+                class="auth-field has-toggle"
+                placeholder="Password"
+                required
+                autocomplete="current-password"
+              >
+              <button type="button" class="auth-toggle-pass-btn" id="btn-toggle-pass" aria-label="Lihat kata sandi">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
+
+            <div class="auth-actions-row">
+              <label>
+                <input type="checkbox" id="remember-me" checked>
+                <span>Ingat sesi masuk</span>
+              </label>
+              <a href="javascript:void(0)" class="auth-link" onclick="alert('Untuk demonstrasi tugas: gunakan akun demo di atas dengan sandi: mitra123')">
+                Forgot password?
+              </a>
+            </div>
+
+            <button type="submit" class="auth-btn-primary">
+              Login
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            Don't have an account? <a href="javascript:void(0)" id="switch-to-register">Register here</a>
+          </div>
+        </div>
+
+        <div id="register-view-block" style="display:none">
+          <div class="auth-card-header">
+            <h2 class="auth-card-title">Daftar Akun</h2>
+            <p class="auth-card-subtitle">Buat akun mitra UMKM untuk pasang lowongan kerja</p>
+          </div>
+
+          <form id="partner-register-form">
+            <div class="auth-input-group">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </span>
+              <input
+                type="text"
+                id="register-name"
+                class="auth-field"
+                placeholder="Nama UMKM / Usaha"
+                required
+                autocomplete="organization"
+              >
+            </div>
+
+            <div class="auth-input-group">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </span>
+              <input
+                type="tel"
+                id="register-whatsapp"
+                class="auth-field"
+                placeholder="Nomor WhatsApp Usaha (Contoh: 081234567890)"
+                required
+                autocomplete="tel"
+              >
+            </div>
+
+            <div class="auth-input-group">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </span>
+              <input
+                type="password"
+                id="register-password"
+                class="auth-field has-toggle"
+                placeholder="Buat kata sandi akun (min. 6 karakter)"
+                required
+                minlength="6"
+                autocomplete="new-password"
+              >
+              <button type="button" class="auth-toggle-pass-btn" id="btn-toggle-reg-pass" aria-label="Lihat kata sandi">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
+
+            <div style="margin-top:4px;margin-bottom:16px;font-size:12px;color:var(--mut);line-height:1.45">
+              Nomor WhatsApp akan otomatis digunakan oleh mahasiswa saat mengajukan lamaran tugas.
+            </div>
+
+            <button type="submit" class="auth-btn-primary">
+              Daftar sebagai Mitra Baru
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            Sudah punya akun? <a href="javascript:void(0)" id="switch-to-login">Masuk di sini</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-message" id="toast-feedback" role="status"></div>
+
+  <script src="js/data.js"></script>
+  <script>
+    function initTheme() {
+      const savedTheme = localStorage.getItem("sambilan_theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.dataset.theme;
+      const isCurrentlyDark = current === "dark" || (!current && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      const nextTheme = isCurrentlyDark ? "light" : "dark";
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem("sambilan_theme", nextTheme);
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast-feedback");
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add("active");
+      setTimeout(() => el.classList.remove("active"), 2000);
+    }
+
+    document.querySelectorAll("[data-toggle-theme]").forEach(b => b.addEventListener("click", toggleTheme));
+
+    const togglePassBtn = document.getElementById("btn-toggle-pass");
+    const passInput = document.getElementById("login-password");
+    if (togglePassBtn && passInput) {
+      togglePassBtn.addEventListener("click", () => {
+        const isPass = passInput.type === "password";
+        passInput.type = isPass ? "text" : "password";
+      });
+    }
+
+    function getApiBaseUrl() {
+      if (typeof window !== "undefined" && window.location) {
+        if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+          if (window.location.port === "3000") return "";
+          return "http://localhost:3000";
+        }
+        return "http://localhost:3000";
+      }
+      return "";
+    }
+
+    document.getElementById("partner-login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const identifier = document.getElementById("login-identifier").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const submitBtn = e.target.querySelector("button[type='submit']");
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Memverifikasi...";
+
+      try {
+        const baseUrl = getApiBaseUrl();
+        const response = await fetch(`${baseUrl}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ identifier, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          localStorage.setItem("sambilan_partner_auth", JSON.stringify({
+            id: data.partner.id,
+            name: data.partner.name,
+            phone: data.partner.whatsAppNumber || identifier,
+            initials: data.partner.initials,
+            brandColor: data.partner.brandColor,
+            loggedInAt: new Date().toISOString()
+          }));
+
+          showToast(`Berhasil masuk sebagai ${data.partner.name}`);
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 600);
+          return;
+        } else {
+          showToast(data.error || "Gagal masuk. Periksa nomor WhatsApp dan kata sandi.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Masuk sebagai Mitra UMKM";
+          return;
+        }
+      } catch (err) {
+        // Fallback jika backend server sedang offline
+        const fallbackPartner = UMKM_PARTNERS.find(p => p.name.toLowerCase().includes("kopi")) || { name: "Mitra UMKM", initials: "MU", brandColor: "#0b63d8" };
+        localStorage.setItem("sambilan_partner_auth", JSON.stringify({
+          name: fallbackPartner.name,
+          phone: identifier,
+          initials: fallbackPartner.initials,
+          brandColor: fallbackPartner.brandColor,
+          loggedInAt: new Date().toISOString()
+        }));
+        showToast(`Masuk offline sebagai ${fallbackPartner.name}`);
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 600);
+      }
+    });
+
+    const switchToRegister = document.getElementById("switch-to-register");
+    const switchToLogin = document.getElementById("switch-to-login");
+    const loginView = document.getElementById("login-view-block");
+    const registerView = document.getElementById("register-view-block");
+
+    if (switchToRegister && switchToLogin && loginView && registerView) {
+      switchToRegister.addEventListener("click", () => {
+        loginView.style.display = "none";
+        registerView.style.display = "block";
+      });
+      switchToLogin.addEventListener("click", () => {
+        registerView.style.display = "none";
+        loginView.style.display = "block";
+      });
+    }
+
+    const toggleRegPassBtn = document.getElementById("btn-toggle-reg-pass");
+    const regPassInput = document.getElementById("register-password");
+    if (toggleRegPassBtn && regPassInput) {
+      toggleRegPassBtn.addEventListener("click", () => {
+        const isPass = regPassInput.type === "password";
+        regPassInput.type = isPass ? "text" : "password";
+      });
+    }
+
+    document.getElementById("partner-register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("register-name").value.trim();
+      const whatsappNumber = document.getElementById("register-whatsapp").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+      const submitBtn = e.target.querySelector("button[type='submit']");
+
+      if (!name || !whatsappNumber || !password) {
+        showToast("Mohon lengkapi semua kolom pendaftaran.");
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast("Kata sandi minimal 6 karakter.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Mendaftarkan...";
+
+      try {
+        const baseUrl = getApiBaseUrl();
+        const response = await fetch(`${baseUrl}/api/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, whatsappNumber, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          localStorage.setItem("sambilan_partner_auth", JSON.stringify({
+            id: data.partner.id,
+            name: data.partner.name,
+            phone: data.partner.whatsAppNumber || whatsappNumber,
+            initials: data.partner.initials,
+            brandColor: data.partner.brandColor,
+            loggedInAt: new Date().toISOString()
+          }));
+
+          showToast(`Selamat bergabung, ${data.partner.name}!`);
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 600);
+          return;
+        } else {
+          showToast(data.error || "Gagal mendaftarkan akun.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Daftar sebagai Mitra Baru";
+          return;
+        }
+      } catch (err) {
+        const initials = name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase() || "UM";
+        localStorage.setItem("sambilan_partner_auth", JSON.stringify({
+          name,
+          phone: whatsappNumber,
+          initials,
+          brandColor: "#0b63d8",
+          loggedInAt: new Date().toISOString()
+        }));
+        showToast(`Pendaftaran offline berhasil: ${name}`);
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 600);
+      }
+    });
+
+    initTheme();
+  </script>
+</body>
+</html>
+

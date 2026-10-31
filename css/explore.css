@@ -1,0 +1,189 @@
+/* EXPLORE PAGE LAYOUT (TUGAS AKHIR PEKAN & DEKAT KAMPUS) */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--mut);
+  margin-bottom: 16px;
+}
+
+.breadcrumbs a {
+  color: var(--pri);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.explore-page-header {
+  margin-bottom: 24px;
+}
+
+.explore-page-header h1 {
+  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 800;
+  color: var(--tx);
+  letter-spacing: -0.02em;
+}
+
+.explore-page-header p {
+  color: var(--mut);
+  font-size: 14.5px;
+  margin-top: 4px;
+}
+
+.explore-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.explore-sidebar {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 80px);
+  padding: 20px;
+}
+
+.explore-sidebar-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--tx);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--br);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-reset-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pri);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.filter-reset-link:hover {
+  text-decoration: underline;
+}
+
+.filter-group-block {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--br);
+}
+
+.filter-group-block:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-group-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-option-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--tx);
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.filter-option-item input[type="checkbox"],
+.filter-option-item input[type="radio"] {
+  accent-color: var(--pri);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.explore-results-panel {
+  min-width: 0;
+}
+
+.explore-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.results-count-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tx);
+}
+
+.campus-pill-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+}
+
+.campus-pill-btn {
+  background: var(--sf);
+  border: 1px solid var(--br);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--tx);
+  white-space: nowrap;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.campus-pill-btn:hover {
+  border-color: var(--pri);
+}
+
+.campus-pill-btn.active {
+  background: var(--pri);
+  border-color: var(--pri);
+  color: #ffffff;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--mut);
+  background: var(--sf);
+  border: 1px dashed var(--br);
+  border-radius: 12px;
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  color: var(--tx);
+  margin-bottom: 6px;
+}
+
+@media (max-width: 900px) {
+  .explore-layout {
+    grid-template-columns: 1fr;
+  }
+  .explore-sidebar {
+    position: static;
+  }
+}
+

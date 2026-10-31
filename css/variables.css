@@ -1,0 +1,135 @@
+:root {
+  /* LIGHT MODE - PALET WARNA RESMI */
+  --bg: #edf5fe;
+  --h1: #d4e8ff;
+  --sf: #ffffff;
+  --ps: #deedff;
+  --ps-br: #cbe0fa;
+  --subtle: #f3f8fe;
+
+  --tx: #132040;
+  --mut: #5e718d;
+  --br: #cde0f5;
+
+  --pri: #0b63d8;
+  --pri-hover: #0952b5;
+  --on: #ffffff;
+
+  --acc: #d9701a;
+  --acc-dot: #f58220;
+  --acc-soft: #fdeee2;
+
+  --ok: #0e8759;
+  --ok-bg: #e6f7f0;
+  --danger: #d92d20;
+  --danger-bg: #fef3f2;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* DARK MODE - PALET WARNA RESMI */
+:root[data-theme="dark"] {
+  --bg: #0c1524;
+  --h1: #0c1524;
+  --sf: #132035;
+  --ps: #182842;
+  --ps-br: #1f3354;
+  --subtle: #16253d;
+
+  --tx: #ecf3fc;
+  --mut: #8fa8c6;
+  --br: #1c2e47;
+
+  --pri: #3b8ef5;
+  --pri-hover: #5aa1fb;
+  --on: #0c1524;
+
+  --acc: #f28b42;
+  --acc-dot: #f58220;
+  --acc-soft: #301f15;
+
+  --ok: #38c88f;
+  --ok-bg: #0f3022;
+  --danger: #f87171;
+  --danger-bg: #351414;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1524;
+    --h1: #0c1524;
+    --sf: #132035;
+    --ps: #182842;
+    --ps-br: #1f3354;
+    --subtle: #16253d;
+
+    --tx: #ecf3fc;
+    --mut: #8fa8c6;
+    --br: #1c2e47;
+
+    --pri: #3b8ef5;
+    --pri-hover: #5aa1fb;
+    --on: #0c1524;
+
+    --acc: #f28b42;
+    --acc-dot: #f58220;
+    --acc-soft: #301f15;
+
+    --ok: #38c88f;
+    --ok-bg: #0f3022;
+    --danger: #f87171;
+    --danger-bg: #351414;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 72px);
+}
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  color: var(--tx);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  background: var(--sf);
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--pri);
+  outline-offset: 2px;
+}
+
+.container-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
