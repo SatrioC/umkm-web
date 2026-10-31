@@ -60,7 +60,8 @@ flowchart TD
   UMKMWAReceived --> CandidateMatch{Cocok?}
   CandidateMatch -- Tidak --> StudentBrowse
   CandidateMatch -- Ya --> Accepted[UMKM Menerima Kandidat]
-  Accepted --> Finish([Selesai])
+  Accepted --> ConfirmedWA[UMKM Menerima WA]
+  ConfirmedWA --> Finish([Selesai])
 ```
 
 Sistem beroperasi berdasarkan alur bisnis dua arah antara UMKM (pemberi kerja) dan Mahasiswa (pencari tugas):
@@ -88,7 +89,7 @@ Sistem beroperasi berdasarkan alur bisnis dua arah antara UMKM (pemberi kerja) d
 5. **Pencatatan Lamaran & Evaluasi**:
    - Sistem mencatat interaksi ke tabel `applications` dengan status awal `pending`.
    - Melalui menu **Tugas Saya**, UMKM dapat melakukan simulasi evaluasi:
-     - **Cocok (Terima)**: Status berubah menjadi `accepted`, kesepakatan selesai.
+     - **Cocok (Terima)**: Status berubah menjadi `accepted`, UMKM menerima kandidat lalu menerima pesan WhatsApp konfirmasi penugasan hingga proses tuntas (*Selesai*).
      - **Tidak Cocok**: Status berubah menjadi `rejected`, mahasiswa diarahkan mencari tugas lain.
 
 ---
