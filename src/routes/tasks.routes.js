@@ -2,110 +2,97 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
 
+function formatTask(row) {
+  return {
+    id: row.id,
+    title: row.title,
+    categoryKey: row.category_key,
+    partnerIndex: row.partner_id ? row.partner_id - 1 : 0,
+    partnerName: row.partner_name || row.custom_partner_name || "Mitra UMKM",
+    partnerRating: row.partner_rating || 4.8,
+    stipend: row.stipend,
+    duration: row.duration,
+    schedule: row.schedule,
+    availableDays: JSON.parse(row.available_days || "[]"),
+    distanceKm: row.distance_km,
+    location: row.location,
+    whatsAppNumber: row.whatsapp_number,
+    startDate: row.start_date,
+    isFeatured: Boolean(row.is_featured),
+    isActive: Boolean(row.is_active),
+    description: row.description
+  };
+}
+
+const taskSelect = `
+  SELECT t.*, p.name as partner_name, p.rating as partner_rating, p.brand_color as partner_color
+  FROM tasks t
+  LEFT JOIN partners p ON t.partner_id = p.id
+`;
+
 // GET /api/tasks
 router.get("/", (req, res) => {
   try {
     const { q, category, featured, near, weekend, hi } = req.query;
-
-    let sql = `
-      SELECT t.*, p.name as partner_name, p.rating as partner_rating, p.brand_color as partner_color
-      FROM tasks t
-      LEFT JOIN partners p ON t.partner_id = p.id
-      WHERE 1=1
-    `;
+    let sql = `${taskSelect} WHERE t.is_active = 1`;
     const params = [];
 
     if (category) {
       sql += " AND t.category_key = ?";
       params.push(category);
     }
-
     if (featured === "1" || featured === "true") {
       sql += " AND t.is_featured = 1";
     }
-
     if (near === "1" || near === "true") {
       sql += " AND t.distance_km <= 2.0";
     }
-
     if (hi === "1" || hi === "true") {
       sql += " AND t.stipend >= 100000";
     }
 
     sql += " ORDER BY t.is_featured DESC, t.id DESC";
+    let tasks = db.prepare(sql).all(...params).map(formatTask);
 
-    const rows = db.prepare(sql).all(...params);
+    if (q) {
+      const query = q.toLowerCase();
+      tasks = tasks.filter((task) =>
+        `${task.title} ${task.partnerName} ${task.location} ${task.description}`.toLowerCase().includes(query)
+      );
+    }
+    if (weekend === "1" || weekend === "true") {
+      tasks = tasks.filter((task) => task.availableDays.some((day) => day === "Sab" || day === "Min"));
+    }
 
-    const formatted = rows
-      .map((row) => ({
-        id: row.id,
-        title: row.title,
-        categoryKey: row.category_key,
-        partnerIndex: row.partner_id ? row.partner_id - 1 : 0,
-        partnerName: row.partner_name || row.custom_partner_name || "Mitra UMKM",
-        partnerRating: row.partner_rating || 4.8,
-        stipend: row.stipend,
-        duration: row.duration,
-        schedule: row.schedule,
-        availableDays: JSON.parse(row.available_days || "[]"),
-        distanceKm: row.distance_km,
-        location: row.location,
-        whatsAppNumber: row.whatsapp_number,
-        startDate: row.start_date,
-        isFeatured: Boolean(row.is_featured),
-        description: row.description
-      }))
-      .filter((task) => {
-        if (!q) return true;
-        const query = q.toLowerCase();
-        const searchable = `${task.title} ${task.partnerName} ${task.location} ${task.description}`.toLowerCase();
-        return searchable.includes(query);
-      })
-      .filter((task) => {
-        if (weekend === "1" || weekend === "true") {
-          return task.availableDays.some((d) => d === "Sab" || d === "Min");
-        }
-        return true;
-      });
-
-    res.json(formatted);
+    res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: "Gagal mengambil daftar tugas" });
+  }
+});
+
+// GET /api/tasks/partner/:partnerId
+router.get("/partner/:partnerId", (req, res) => {
+  try {
+    const partnerId = Number(req.params.partnerId);
+    if (!Number.isInteger(partnerId)) {
+      return res.status(400).json({ error: "ID mitra tidak valid" });
+    }
+
+    const rows = db.prepare(`${taskSelect} WHERE t.partner_id = ? ORDER BY t.is_active DESC, t.id DESC`).all(partnerId);
+    res.json(rows.map(formatTask));
+  } catch (error) {
+    res.status(500).json({ error: "Gagal mengambil lowongan milik mitra" });
   }
 });
 
 // GET /api/tasks/:id
 router.get("/:id", (req, res) => {
   try {
-    const task = db.prepare(`
-      SELECT t.*, p.name as partner_name, p.rating as partner_rating, p.brand_color as partner_color
-      FROM tasks t
-      LEFT JOIN partners p ON t.partner_id = p.id
-      WHERE t.id = ?
-    `).get(req.params.id);
-
+    const task = db.prepare(`${taskSelect} WHERE t.id = ? AND t.is_active = 1`).get(req.params.id);
     if (!task) {
       return res.status(404).json({ error: "Lowongan tidak ditemukan" });
     }
-
-    res.json({
-      id: task.id,
-      title: task.title,
-      categoryKey: task.category_key,
-      partnerIndex: task.partner_id ? task.partner_id - 1 : 0,
-      partnerName: task.partner_name || task.custom_partner_name || "Mitra UMKM",
-      partnerRating: task.partner_rating || 4.8,
-      stipend: task.stipend,
-      duration: task.duration,
-      schedule: task.schedule,
-      availableDays: JSON.parse(task.available_days || "[]"),
-      distanceKm: task.distance_km,
-      location: task.location,
-      whatsAppNumber: task.whatsapp_number,
-      startDate: task.start_date,
-      isFeatured: Boolean(task.is_featured),
-      description: task.description
-    });
+    res.json(formatTask(task));
   } catch (error) {
     res.status(500).json({ error: "Gagal mengambil detail tugas" });
   }
@@ -115,33 +102,24 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   try {
     const {
-      title,
-      categoryKey,
-      customPartnerName,
-      stipend,
-      duration,
-      location,
-      whatsAppNumber,
-      startDate,
-      isFeatured,
-      description
+      title, categoryKey, partnerId, customPartnerName, stipend, duration,
+      location, whatsAppNumber, startDate, isFeatured, description
     } = req.body;
 
     if (!title || !categoryKey || !location || !whatsAppNumber || !startDate || !description) {
       return res.status(400).json({ error: "Data wajib tidak lengkap" });
     }
 
-    const insertStmt = db.prepare(`
+    const result = db.prepare(`
       INSERT INTO tasks (
         title, category_key, partner_id, custom_partner_name, stipend, duration,
-        schedule, available_days, distance_km, location, whatsapp_number, start_date, is_featured, description
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    const result = insertStmt.run(
+        schedule, available_days, distance_km, location, whatsapp_number, start_date,
+        is_featured, is_active, description
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+    `).run(
       title,
       categoryKey,
-      null,
+      Number.isInteger(Number(partnerId)) ? Number(partnerId) : null,
       customPartnerName || "Mitra UMKM",
       parseInt(stipend, 10) || 50000,
       duration || "Sesuai kesepakatan",
@@ -165,5 +143,45 @@ router.post("/", (req, res) => {
   }
 });
 
-module.exports = router;
+// PATCH /api/tasks/:id/status
+router.patch("/:id/status", (req, res) => {
+  try {
+    const taskId = Number(req.params.id);
+    const partnerId = Number(req.body.partnerId);
+    const isActive = req.body.isActive;
+    if (!Number.isInteger(taskId) || !Number.isInteger(partnerId) || typeof isActive !== "boolean") {
+      return res.status(400).json({ error: "Data status lowongan tidak valid" });
+    }
 
+    const result = db.prepare(
+      "UPDATE tasks SET is_active = ? WHERE id = ? AND partner_id = ?"
+    ).run(isActive ? 1 : 0, taskId, partnerId);
+    if (result.changes === 0) {
+      return res.status(404).json({ error: "Lowongan tidak ditemukan atau bukan milik akun ini" });
+    }
+    res.json({ success: true, isActive });
+  } catch (error) {
+    res.status(500).json({ error: "Gagal mengubah status lowongan" });
+  }
+});
+
+// DELETE /api/tasks/:id
+router.delete("/:id", (req, res) => {
+  try {
+    const taskId = Number(req.params.id);
+    const partnerId = Number(req.query.partnerId);
+    if (!Number.isInteger(taskId) || !Number.isInteger(partnerId)) {
+      return res.status(400).json({ error: "Data penghapusan lowongan tidak valid" });
+    }
+
+    const result = db.prepare("DELETE FROM tasks WHERE id = ? AND partner_id = ?").run(taskId, partnerId);
+    if (result.changes === 0) {
+      return res.status(404).json({ error: "Lowongan tidak ditemukan atau bukan milik akun ini" });
+    }
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: "Gagal menghapus lowongan" });
+  }
+});
+
+module.exports = router;

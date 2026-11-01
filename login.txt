@@ -1,0 +1,4 @@
+npm.cmd start
+
+WhatsApp: 081234567891
+Password: mitra123

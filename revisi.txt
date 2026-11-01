@@ -1,0 +1,5 @@
+01/11/2026
++ pisah landing page index.html ama loker jadi lowongan.html biar kalo user masuk web gak langsung ditepok info loker depan muka
++ fix visual akun umkm yang login cuman tampil di lowongan.html, di sisa halaman gak muncul
++ profil akun umkm buat atur iklan job dipasang, cek aja fitur2nya kalo kureng tambahin
+

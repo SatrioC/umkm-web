@@ -957,6 +957,7 @@ async function handleJobFormSubmit(event) {
   event.preventDefault();
 
   const umkmName = document.getElementById("job-umkm-name")?.value.trim() || "Mitra UMKM";
+  const currentPartner = getLoggedInPartner();
   const title = document.getElementById("job-title")?.value.trim();
   const categoryKey = document.getElementById("job-category")?.value;
   const description = document.getElementById("job-desc")?.value.trim();
@@ -975,6 +976,7 @@ async function handleJobFormSubmit(event) {
     id: Date.now(),
     title,
     categoryKey,
+    partnerId: currentPartner?.id || null,
     partnerIndex: 0,
     customPartnerName: umkmName,
     stipend,
@@ -1044,7 +1046,7 @@ function updateNavAuthSlot() {
       slot.innerHTML = `
         <span style="font-size:12.5px;font-weight:700;color:var(--tx);white-space:nowrap;display:inline-flex;align-items:center;gap:6px">
           <span style="width:24px;height:24px;border-radius:6px;background:var(--pri);color:#fff;display:inline-grid;place-items:center;font-size:11px">${auth.initials || "UM"}</span>
-          ${auth.name}
+          <a href="profil-mitra.html" data-open-profile style="color:inherit;text-decoration:none">${auth.name}</a>
         </span>
         <button type="button" class="btn btn-outline" style="padding:4px 8px;font-size:11.5px" data-partner-logout title="Keluar dari akun mitra">
           Keluar
@@ -1064,13 +1066,81 @@ function updateNavAuthSlot() {
 function renderCurrentPage() {
   updateNavAuthSlot();
   const pageType = document.body.dataset.page;
-  if (pageType === "weekend") {
+  if (pageType === "profile") {
+    renderPartnerProfilePage();
+  } else if (pageType === "weekend") {
     renderExploreWeekendPage();
   } else if (pageType === "near") {
     renderExploreNearCampusPage();
   } else {
     renderHomePage();
   }
+}
+
+async function renderPartnerProfilePage() {
+    const container = document.getElementById("partner-profile-content");
+    const partner = getLoggedInPartner();
+    if (!container || !partner?.id) return;
+
+    container.innerHTML = `<div class="empty-state"><p>Memuat iklan milik akun ini...</p></div>`;
+    try {
+      const response = await fetch(`${getApiBaseUrl()}/api/tasks/partner/${partner.id}`);
+      if (!response.ok) throw new Error("Gagal memuat iklan");
+      const tasks = await response.json();
+      container.innerHTML = tasks.length
+        ? tasks.map(createPartnerTaskManagementCard).join("")
+        : `<div class="empty-state"><h3>Belum ada iklan</h3><p>Pasang lowongan pertama untuk mulai mencari pengisi.</p></div>`;
+    } catch (error) {
+      container.innerHTML = `<div class="empty-state"><h3>Gagal memuat iklan</h3><p>Silakan muat ulang halaman dan coba lagi.</p></div>`;
+    }
+  }
+
+function createPartnerTaskManagementCard(task) {
+    return `
+      <article class="surface-box partner-task-management-card ${task.isActive ? "" : "is-disabled"}">
+        <div>
+          <div class="card-badge-row">
+            <span class="glints-pill-tag">${task.isActive ? "Aktif" : "Nonaktif"}</span>
+            ${task.isFeatured ? `<span class="glints-pill-tag glints-pill-urgent">PRIORITAS</span>` : ""}
+          </div>
+          <h3>${task.title}</h3>
+          <p>${task.location} · Rp ${Number(task.stipend).toLocaleString("id-ID")}</p>
+          <small>${task.isActive ? "Tampil di katalog mahasiswa" : "Disembunyikan sementara dari katalog"}</small>
+        </div>
+        <div class="partner-task-actions">
+          <button type="button" class="btn btn-outline" data-toggle-task-status="${task.id}" data-next-status="${!task.isActive}">
+            ${task.isActive ? "Nonaktifkan iklan" : "Aktifkan kembali"}
+          </button>
+          <button type="button" class="btn btn-danger-outline" data-delete-task="${task.id}">Hapus permanen</button>
+        </div>
+      </article>
+    `;
+  }
+
+async function updatePartnerTaskStatus(taskId, isActive) {
+    const partner = getLoggedInPartner();
+    if (!partner?.id) return;
+    const response = await fetch(`${getApiBaseUrl()}/api/tasks/${taskId}/status`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ partnerId: partner.id, isActive })
+    });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || "Status iklan gagal diubah");
+    }
+    await renderPartnerProfilePage();
+  }
+
+async function deletePartnerTask(taskId) {
+    const partner = getLoggedInPartner();
+    if (!partner?.id) return;
+    const response = await fetch(`${getApiBaseUrl()}/api/tasks/${taskId}?partnerId=${partner.id}`, { method: "DELETE" });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || "Iklan gagal dihapus");
+    }
+    await renderPartnerProfilePage();
 }
 
 function renderHomePage() {
@@ -1127,7 +1197,7 @@ function renderExploreNearCampusPage() {
   gridEl.innerHTML = filteredTasks.map(createGlintsCardHtml).join("");
 }
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
   const target = event.target;
 
   const bookmarkTrigger = target.closest("[data-bookmark]");
@@ -1263,6 +1333,32 @@ document.addEventListener("click", (event) => {
   const openPostJobTrigger = target.closest("[data-open-post-job]");
   if (openPostJobTrigger) {
     renderPostJobModal();
+    return;
+  }
+
+  const toggleTaskStatusTrigger = target.closest("[data-toggle-task-status]");
+  if (toggleTaskStatusTrigger) {
+    try {
+      await updatePartnerTaskStatus(
+        parseInt(toggleTaskStatusTrigger.dataset.toggleTaskStatus, 10),
+        toggleTaskStatusTrigger.dataset.nextStatus === "true"
+      );
+      showToastNotification("Status iklan berhasil diperbarui.");
+    } catch (error) {
+      showToastNotification(error.message);
+    }
+    return;
+  }
+
+  const deleteTaskTrigger = target.closest("[data-delete-task]");
+  if (deleteTaskTrigger) {
+    if (!window.confirm("Hapus permanen iklan ini? Nonaktifkan saja jika masih mungkin dibutuhkan lagi.")) return;
+    try {
+      await deletePartnerTask(parseInt(deleteTaskTrigger.dataset.deleteTask, 10));
+      showToastNotification("Iklan dihapus permanen.");
+    } catch (error) {
+      showToastNotification(error.message);
+    }
     return;
   }
 

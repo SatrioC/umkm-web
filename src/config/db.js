@@ -32,6 +32,7 @@ db.exec(`
     whatsapp_number TEXT NOT NULL,
     start_date TEXT NOT NULL,
     is_featured INTEGER DEFAULT 0,
+    is_active INTEGER DEFAULT 1,
     description TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
@@ -49,6 +50,7 @@ db.exec(`
 try { db.exec("ALTER TABLE partners ADD COLUMN whatsapp_number TEXT;"); } catch {}
 try { db.exec("ALTER TABLE partners ADD COLUMN password TEXT DEFAULT 'mitra123';"); } catch {}
 try { db.exec("ALTER TABLE partners ADD COLUMN email TEXT;"); } catch {}
+try { db.exec("ALTER TABLE tasks ADD COLUMN is_active INTEGER DEFAULT 1;"); } catch {}
 
 // Seed data awal jika tabel partners masih kosong
 const partnerCountRow = db.prepare("SELECT COUNT(*) AS count FROM partners").get();
@@ -149,4 +151,3 @@ if (taskCountRow.count === 0) {
 }
 
 module.exports = db;
-
